@@ -1,3 +1,4 @@
+import { Pill } from "@/app/ui/components/Pill";
 import { MouseEvent } from "react";
 
 type Todo = {
@@ -15,9 +16,9 @@ type Props = {
 };
 
 const pillColorMap = {
-  P1: "bg-cyan-400",
-  P2: "bg-yellow-500 ",
-  P3: "bg-red-500",
+  P1: "blue" as const,
+  P2: "yellow" as const,
+  P3: "red" as const,
 };
 
 const CheckBoxIcon = () => (
@@ -82,14 +83,12 @@ export const Todo = ({ todo, key, onClick, onPillClick }: Props) => {
       </div>
 
       <div>
-        <div
-          className={`${
-            pillColorMap[todo.due]
-          } shadow-md text-xs py-1 px-4 rounded-full`}
-          onClick={onPillClick(todo)}
-        >
-          {todo.due}
-        </div>
+        <Pill
+          color={pillColorMap[todo.due]}
+          content={todo.due}
+          size="small"
+          onClick={(event) => onPillClick(todo)(event)}
+        />
       </div>
     </div>
   );
